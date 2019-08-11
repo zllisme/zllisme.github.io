@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | Hexo</title>
+  <title>SpringSecurity之认证 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="Spring Security，这是一种基于 Spring AOP 和 Servlet 过滤器的安全框架，主要围绕认证和授权，提供一系列完整的可配置可定制可复用的强大安全保护功能。 Spring Security内容繁多复杂。本文将按照个人的理解，先从简介绍Spring Security的认证模块，之后再介绍下授权模块。 如需了解Spring Security具体细节，请自行查阅官方文档（链接：英">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/hello-world/index.html">
+<meta property="og:title" content="SpringSecurity之认证">
+<meta property="og:url" content="http://yoursite.com/2019/08/11/SpringSecurity之认证/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Spring Security，这是一种基于 Spring AOP 和 Servlet 过滤器的安全框架，主要围绕认证和授权，提供一系列完整的可配置可定制可复用的强大安全保护功能。 Spring Security内容繁多复杂。本文将按照个人的理解，先从简介绍Spring Security的认证模块，之后再介绍下授权模块。 如需了解Spring Security具体细节，请自行查阅官方文档（链接：英">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-07T00:40:13.778Z">
+<meta property="og:updated_time" content="2019-08-11T11:40:13.831Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="SpringSecurity之认证">
+<meta name="twitter:description" content="Spring Security，这是一种基于 Spring AOP 和 Servlet 过滤器的安全框架，主要围绕认证和授权，提供一系列完整的可配置可定制可复用的强大安全保护功能。 Spring Security内容繁多复杂。本文将按照个人的理解，先从简介绍Spring Security的认证模块，之后再介绍下授权模块。 如需了解Spring Security具体细节，请自行查阅官方文档（链接：英">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -47,10 +47,10 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="https://note.youdao.com/yws/api/personal/file/513918b0b1de1015fcb46f34e1605af5?method=download&amp;shareKey=4ac9d44630acf4f1688db35f1946e5c9" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		  <h1 class="header-author"><a href="/">Jasmine Zhu</a></h1>
 		</hgroup>
 		
 
@@ -58,8 +58,6 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -70,8 +68,6 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
             
     			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
@@ -81,14 +77,6 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
-		        
 			</div>
 		</nav>
 	</header>		
@@ -105,15 +93,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="https://note.youdao.com/yws/api/personal/file/513918b0b1de1015fcb46f34e1605af5?method=download&amp;shareKey=4ac9d44630acf4f1688db35f1946e5c9" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">John Doe</h1>
+			  <h1 class="header-author js-header-author">Jasmine Zhu</h1>
 			</hgroup>
 			
 			
-			
-				
 			
 				
 			
@@ -122,14 +108,6 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
-			        
 				</div>
 			</nav>
 
@@ -137,9 +115,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -154,39 +130,122 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SpringSecurity之认证" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      SpringSecurity之认证
     </h1>
   
 
         
-        <a href="/2019/08/07/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-07T00:40:13.777Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+        <a href="/2019/08/11/SpringSecurity之认证/" class="archive-article-date">
+  	<time datetime="2019-08-11T10:54:39.164Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>Spring Security，这是一种基于 Spring AOP 和 Servlet 过滤器的安全框架，主要围绕认证和授权，提供一系列完整的可配置可定制可复用的强大安全保护功能。</p>
+<p>Spring Security内容繁多复杂。本文将按照个人的理解，先从简介绍Spring Security的认证模块，之后再介绍下授权模块。</p>
+<p>如需了解Spring Security具体细节，请自行查阅官方文档（链接：<a href="http://docs.spring.io/spring-security/site/docs/4.2.2.RELEASE/reference/htmlsingle/" title="英文原文" target="_blank" rel="noopener">英文原文</a>， <a href="https://springcloud.cc/spring-security-zhcn.html" title="机翻中文" target="_blank" rel="noopener">机翻中文</a>）。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Spring Security主要提供认证和授权功能。因此要了解Spring Security，首先要知道什么是认证和授权。</p>
+<p><strong>认证(Authentication)</strong></p>
+<p>认证，主要是用于解决了 “Who am I?” 的身份验证的问题。</p>
+<p>常见的认证相关场景，有：各类网站软件游戏的账号登录、手机app通过短信语音等验证码登录等。</p>
+<blockquote>
+<p>认证方面存在缺陷，将导致<code>xxx未授权访问</code>漏洞，即通过一定的方法，部分资源可以无需认证直接访问，例：Redis未授权访问。</p>
+</blockquote>
+<p><strong>授权(Authorization，和访问控制、access-control同义)</strong></p>
+<p>授权，主要是用于解决了 “What can I do?”的权限控制的问题。</p>
+<p>常见的授权相关场景，有：各类网站通过QQ账号登录、视频网站基于你是否会员身份给不给看视频等。</p>
+<blockquote>
+<p>授权方面存在缺陷，将导致<code>越权</code>问题。</p>
+<p><code>越权</code>理论上可分为<code>垂直越权</code>，和<code>水平越权</code>。</p>
+<p><code>垂直越权</code>是指低权限用户，可通过一定的方法，访问本来不可访问的高权限用户的资源。</p>
+<p><code>水平越权</code>是指同等权限用户，可通过一定的方法，访问不属于自身的资源。</p>
+<p>注：自己搜索<code>越权</code>，一大堆 。</p>
+<p>值得指出的是，Spring Security仅能提供<code>垂直越权</code>的解决方案。<code>水平越权</code>解决方法基本上要从数据库设计上着手，依然属于业界难题。</p>
+</blockquote>
+<hr>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>要使用Spring Security，首先要引入相关依赖：</p>
+<p>pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ... other dependency elements ... --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.security<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-security-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>4.2.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.security<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-security-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>4.2.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>接下来是配置应用相关认证和授权逻辑，Spring Security提供了两种代码层和XML配置方法，在这里本人只介绍代码层的配置。</p>
+<p>Spring Security Config配置(Spring Boot下)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        http</span><br><span class="line">            .authorizeRequests()</span><br><span class="line">                .antMatchers(<span class="string">"/user"</span>).hasRole(<span class="string">"USER"</span>)</span><br><span class="line">                .antMatchers(<span class="string">"/admin"</span>).hasRole(<span class="string">"ADMIN"</span>)</span><br><span class="line">                .anyRequest().authenticated()</span><br><span class="line">                .and()</span><br><span class="line">            .formLogin()</span><br><span class="line">                .loginPage(<span class="string">"/login"</span>)</span><br><span class="line">                .permitAll()</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureGlobal</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       auth</span><br><span class="line">           .inMemoryAuthentication()</span><br><span class="line">               .withUser(<span class="string">"user"</span>).password(<span class="string">"password"</span>).roles(<span class="string">"USER"</span>).and()</span><br><span class="line">               .withUser(<span class="string">"admin"</span>).password(<span class="string">"admin"</span>).roles(<span class="string">"ADMIN"</span>);</span><br><span class="line">   	&#125;    </span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>对应的login.html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:sec</span>=<span class="string">"http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Spring Security Example <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:if</span>=<span class="string">"$&#123;param.error&#125;"</span>&gt;</span></span><br><span class="line">    用户名或密码错</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:if</span>=<span class="string">"$&#123;param.logout&#125;"</span>&gt;</span></span><br><span class="line">    您已注销成功</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">"@&#123;/login&#125;"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">label</span>&gt;</span> 用户名 : <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>/&gt;</span> <span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">label</span>&gt;</span> 密 码 : <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>/&gt;</span> <span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"登录"</span>/&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"$&#123;_csrf.parameterName&#125;"</span> <span class="attr">value</span>=<span class="string">"$&#123;_csrf.token&#125;"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>这是一个较为基础的Spring Security示例。有以下要点：</p>
+<ul>
+<li><p>@EnableWebSecurity处，该注释会启动spring security，读取你的配置，并进行一些默认的安全保护机制（<a href="http://docs.spring.io/spring-security/site/docs/4.2.2.RELEASE/reference/htmlsingle/#hello-web-security-java-configuration" target="_blank" rel="noopener">官方文档</a>）；</p>
+</li>
+<li><p>需继承WebSecurityConfigurerAdapter；</p>
+</li>
+<li><p>.authorizeRequests()处，设置访问对应的路径所需要的权限（USER、ADMIN、或需授权等），判断方法为短路逻辑，从上到下判断，遇到符合就不会继续选取；</p>
+</li>
+<li><p>.formLogin()处，指定了登录页面的地址”/login”，且需允许所有人可无授权访问（否则会出现循环跳转错误）；</p>
+</li>
+<li><p>.inMemoryAuthentication()处，在内存中注册用户信息以及相关权限。这里设置了两个用户，拥有不同权限；</p>
+</li>
+<li><p>login.html处，请注意下相关参数名。</p>
+</li>
+</ul>
+<h2 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h2><h3 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h3><ul>
+<li>Authentication </li>
+</ul>
+<p>Authentication 是一个接口，用来表示用户认证信息的。</p>
+<p>在用户发送登录请求后，在进行认证之前，用户的相关信息会封装为一个 Authentication 具体实现类的对象；在登录认证成功之后又会生成一个信息更全面，包含用户权限等信息的 Authentication 对象，然后把它保存在 SecurityContextHolder 所持有的 SecurityContext 中，供后续的程序进行调用，如访问权限的鉴定等。</p>
+<ul>
+<li>SecurityContextHolder</li>
+</ul>
+<p>SecurityContextHolder 用来管理 SecurityContext 。你可以通过 SecurityContextHolder 获取当前线程 SecurityContext ，进而获取认证后的用户信息，如用户名，权限等(<a href="http://docs.spring.io/spring-security/site/docs/4.2.2.RELEASE/reference/htmlsingle/#obtaining-information-about-the-current-user" target="_blank" rel="noopener">官方文档</a>)。</p>
+<ul>
+<li>AuthenticationManager 和 AuthenticationProvider</li>
+</ul>
+<p>AuthenticationManager 是一个用来处理认证（Authentication）请求的接口。</p>
+<p>在 Spring Security 中，AuthenticationManager 的默认实现是 ProviderManager，而且它不直接自己处理认证请求，而是委托给其所配置的 AuthenticationProvider 列表，然后会依次使用每一个 AuthenticationProvider 进行认证。 如果有一个 AuthenticationProvider 认证后的结果不为 null，则表示该 AuthenticationProvider 已经认证成功，之后的 AuthenticationProvider 将不再继续认证；然后直接以该 AuthenticationProvider 的认证结果作为 ProviderManager 的认证结果。如果所有的 AuthenticationProvider 的认证结果都为 null，则表示认证失败，将抛出一个 ProviderNotFoundException。</p>
+<p>DaoAuthenticationProvider 是框架默认的最基础的 AuthenticationProvider。</p>
+<ul>
+<li>UserDetailsService</li>
+</ul>
+<p>UserDetailsService 接口提供通过 用户名 生成合法的用户的UserDetails对象的方法。 目前对该接口理解不是太深，总之可以认为可以通过该接口，使用用户名，获取系统（或数据库中）的用户信息凭证。</p>
+<ul>
+<li>GrantedAuthority</li>
+</ul>
+<p>Authentication 的 getAuthorities() 可以返回当前 Authentication 对象拥有的权限，即当前用户拥有的权限。其返回值是一个 GrantedAuthority 类型的数组，每一个 GrantedAuthority 对象代表赋予给当前用户的一种权限。</p>
+<h3 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h3><ol>
+<li>用户使用用户名和密码进行登录。</li>
+<li>Spring Security 将获取到的用户名和密码封装成一个实现了 Authentication 接口的 UsernamePasswordAuthenticationToken。</li>
+<li>将上述产生的 token 对象传递给 AuthenticationManager 进行登录认证。</li>
+<li>AuthenticationManager 认证成功后将会返回一个封装了用户权限等信息的 Authentication 对象。</li>
+<li>通过调用 SecurityContextHolder.getContext().setAuthentication(…) 将 AuthenticationManager 返回的 Authentication 对象赋予给当前的 SecurityContext。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthenticationExample</span> </span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> AuthenticationManager am = <span class="keyword">new</span> SampleAuthenticationManager();</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">	<span class="comment">//1. 用户使用用户名和密码进行登录。</span></span><br><span class="line">	System.out.println(<span class="string">"Please enter your username:"</span>);</span><br><span class="line">	String name = in.readLine();</span><br><span class="line">	System.out.println(<span class="string">"Please enter your password:"</span>);</span><br><span class="line">	String password = in.readLine();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">	    <span class="comment">//2.将获取到的用户名和密码封装成一个实现了 Authentication 接口的 UsernamePasswordAuthenticationToken。</span></span><br><span class="line">		Authentication request = <span class="keyword">new</span> UsernamePasswordAuthenticationToken(name, password);</span><br><span class="line">		<span class="comment">//3.将上述产生的 token 对象传递给 AuthenticationManager 进行登录认证。</span></span><br><span class="line">		<span class="comment">//4.AuthenticationManager 认证成功后将会返回一个封装了用户权限等信息的 Authentication 对象。</span></span><br><span class="line">		Authentication result = am.authenticate(request);</span><br><span class="line">		<span class="comment">//5. 将Authentication 对象赋予给当前的 SecurityContext。</span></span><br><span class="line">		SecurityContextHolder.getContext().setAuthentication(result);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125; <span class="keyword">catch</span>(AuthenticationException e) &#123;</span><br><span class="line">		System.out.println(<span class="string">"Authentication failed: "</span> + e.getMessage());</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	System.out.println(<span class="string">"Successfully authenticated. Security context contains: "</span> +</span><br><span class="line">			SecurityContextHolder.getContext().getAuthentication());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SampleAuthenticationManager</span> <span class="keyword">implements</span> <span class="title">AuthenticationManager</span> </span>&#123;</span><br><span class="line">    <span class="comment">//每一个 GrantedAuthority 对象代表赋予给当前用户的一种权限</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> List&lt;GrantedAuthority&gt; AUTHORITIES = <span class="keyword">new</span> ArrayList&lt;GrantedAuthority&gt;();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		AUTHORITIES.add(<span class="keyword">new</span> SimpleGrantedAuthority(<span class="string">"ROLE_USER"</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Authentication <span class="title">authenticate</span><span class="params">(Authentication auth)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (auth.getName().equals(auth.getCredentials())) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> UsernamePasswordAuthenticationToken(auth.getName(),</span><br><span class="line">			auth.getCredentials(), AUTHORITIES);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> BadCredentialsException(<span class="string">"Bad Credentials"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>web的认证过程比起上面的，多了请求响应的交互，以及一些权限校验，个人认为理解上面那个过程就够了</p>
+<h3 id="自定义认证"><a href="#自定义认证" class="headerlink" title="自定义认证"></a>自定义认证</h3><p>从上上节 UserDetailsService 的图可以看出，要认证进行自定义配置，可以从 AuthenticationProvider 和 UserDetailsService 接口入手（从其他地方也行，但是个人认为使用我给出的这两个接口就够了）。</p>
+<ul>
+<li>定义自己的AuthenticationProvider</li>
+</ul>
+<p>在这里假设 MyAuthenticationProvider 是 AuthenticationProvider 接口的实现类。</p>
+<p>需要重写<code>Authentication authenticate(Authentication authentication) throws AuthenticationException</code>方法。</p>
+<p>配置方面，可以通过@Bean注入容器，实现自动化配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MyAuthenticationProvider <span class="title">springAuthenticationProvider</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyAuthenticationProvider();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义自己的UserDetailsService</li>
+</ul>
+<p>在这里假设 MyUserDetailsService 是 UserDetailsService 接口的实现类。</p>
+<p>需要重写<code>UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException</code>方法。</p>
+<p>配置方面，同样适用@Bean注入容器，实现自动化配置.</p>
 
       
 
@@ -200,7 +259,7 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
                     
@@ -266,7 +325,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/11/SpringSecurity之认证/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -315,7 +374,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 John Doe
+    		&copy; 2019 Jasmine Zhu
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -356,8 +415,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -369,15 +426,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -440,38 +495,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
-    
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
     
 
     
