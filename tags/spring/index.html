@@ -6,23 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JavaScript:执行上下文与变量对象 | To be a better girl</title>
+  <title>Tag: spring | To be a better girl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="执行上下文每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中的运行环境大概包括两种情况。  全局环境：JavaScript代码运行起来会首先进入该环境 函数环境：当函数被调用执行时，会进入当前函数中执行代码">
-<meta name="keywords" content="JavaScript">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript:执行上下文与变量对象">
-<meta property="og:url" content="http://yoursite.com/2019/08/18/JavaScript-执行上下文与变量对象/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="To be a better girl">
+<meta property="og:url" content="http://yoursite.com/tags/spring/index.html">
 <meta property="og:site_name" content="To be a better girl">
-<meta property="og:description" content="执行上下文每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中的运行环境大概包括两种情况。  全局环境：JavaScript代码运行起来会首先进入该环境 函数环境：当函数被调用执行时，会进入当前函数中执行代码">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/29324320A56C4CDF9F8164D42BB1D447?method=download&shareKey=d49575e48be576766b049ed863bee30e">
-<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/0CFDC9B83D35472A9A469178B8E0AF92?method=download&shareKey=7cd9852ac77e25997c30b476665e0dc0">
-<meta property="og:updated_time" content="2019-08-19T06:19:41.342Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript:执行上下文与变量对象">
-<meta name="twitter:description" content="执行上下文每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中的运行环境大概包括两种情况。  全局环境：JavaScript代码运行起来会首先进入该环境 函数环境：当函数被调用执行时，会进入当前函数中执行代码">
-<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/29324320A56C4CDF9F8164D42BB1D447?method=download&shareKey=d49575e48be576766b049ed863bee30e">
+<meta name="twitter:title" content="To be a better girl">
   
     <link rel="alternative" href="/atom.xml" title="To be a better girl" type="application/atom+xml">
   
@@ -134,197 +126,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JavaScript-执行上下文与变量对象" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      JavaScript:执行上下文与变量对象
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/08/11/SpringSecurity之认证/" class="archive-article-date">
+  	<time datetime="2019-08-11T10:54:39.164Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/11/SpringSecurity之认证/">SpringSecurity之认证</a>
     </h1>
   
 
-        
-        <a href="/2019/08/18/JavaScript-执行上下文与变量对象/" class="archive-article-date">
-  	<time datetime="2019-08-18T03:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中的运行环境大概包括两种情况。</p>
-<ul>
-<li>全局环境：JavaScript代码运行起来会首先进入该环境</li>
-<li>函数环境：当函数被调用执行时，会进入当前函数中执行代码</li>
-</ul>
-<a id="more"></a>
-<p>因此在一个JavaScript程序中，必定会产生多个执行上下文，JavaScript引擎会以栈的方式来处理它们，这个栈，我们称其为<strong>函数调用栈</strong>(call stack)。栈底永远都是全局上下文，而栈顶就是当前正在执行的上下文。</p>
-<p>当代码在执行过程中，遇到以上两种情况，都会生成一个执行上下文，放入栈中，而处于栈顶的上下文执行完毕之后，就会自动出栈。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">'blue'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherColor = <span class="string">'red'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> tempColor = anotherColor;</span><br><span class="line">        anotherColor = color;</span><br><span class="line">        color = tempColor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    swapColors();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeColor();</span><br></pre></td></tr></table></figure>
-
-<p>根据规则，上述代码的入栈过程如下所示：<br><img src="https://note.youdao.com/yws/api/personal/file/29324320A56C4CDF9F8164D42BB1D447?method=download&shareKey=d49575e48be576766b049ed863bee30e" alt="image"></p>
-<h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><p>当调用一个函数时（激活），一个新的执行上下文就会被创建。而一个执行上下文的生命周期可以分为两个阶段。</p>
-<ul>
-<li>创建阶段-在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</li>
-</ul>
-<ul>
-<li>代码执行阶段-创建完成之后，就会开始执行代码，这个时候，会完成变量赋值，函数引用，以及执行其他代码。</li>
-</ul>
-<p><img src="https://note.youdao.com/yws/api/personal/file/0CFDC9B83D35472A9A469178B8E0AF92?method=download&shareKey=7cd9852ac77e25997c30b476665e0dc0" alt="image"></p>
-<p>执行上下文涉及到多方面的知识，这里先介绍变量对象变量对象（Variable Object）。</p>
-<p>变量对象的创建，依次经历了以下几个过程。</p>
-<p>1、 建立arguments对象。检查当前上下文中的参数，建立该对象下的属性与属性值。</p>
-<p>2、 检查当前上下文的<strong>函数声明</strong>，也就是使用function关键字声明的函数。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果函数名的属性已经存在，那么该属性将会被新的引用所覆盖。</p>
-<p>3、 检查当前上下文中的<strong>变量声明</strong>，每找到一个变量声明，就在变量对象中以变量名建立一个属性，属性值为undefined。如果该变量名的属性已经存在，为了防止同名的函数被修改为undefined，则会直接跳过，原函数属性值不会被修改为undefined。</p>
-<p>也就是说function的声明比var的声明更早放入变量对象中。</p>
-<p>举个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// function foo</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'function foo'</span>) &#125;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
-
-<p>根据上面三条规则，上述代码的执行顺序为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先将所有函数声明放入变量对象中</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'function foo'</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其次将所有变量声明放入变量对象中，但是因为foo已经存在同名函数，因此此时会跳过undefined的赋值</span></span><br><span class="line"><span class="comment">// 不将var foo = undefined;放入变量对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后开始执行阶段代码的执行</span></span><br><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// function foo</span></span><br><span class="line">foo = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
-
-<p>根据变量对象，理解变量提升就变得十分简单了。</p>
-<p>再举个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">    <span class="built_in">console</span>.log(foo());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
-
-<p>在上例中，我们直接从test()的执行上下文开始理解。全局作用域中运行test()时，test()的执行上下文开始创建。为了便于理解，我们用如下的形式来表示</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建过程</span></span><br><span class="line">testEC = &#123;</span><br><span class="line">    <span class="comment">// 变量对象</span></span><br><span class="line">    VO: &#123;&#125;,</span><br><span class="line">    scopeChain: &#123;&#125; <span class="comment">//暂时不做讨论</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// VO 为 Variable Object的缩写，即变量对象</span></span><br><span class="line">VO = &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;...&#125;,  <span class="comment">//函数的参数可能并不是放在arguments对象中，这里为了方便理解</span></span><br><span class="line">    foo: &lt;foo reference&gt;  // 表示foo的地址引用</span><br><span class="line">    a: undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行阶段</span></span><br><span class="line">VO -&gt;  AO   <span class="comment">// 变量对象 变为 活动对象</span></span><br><span class="line">AO = &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;...&#125;,</span><br><span class="line">    foo: &lt;foo reference&gt;,</span><br><span class="line">    a: 1,</span><br><span class="line">    this: Window</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>根据之前的理解,test上下文执行顺序如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> a;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">//undefine</span></span><br><span class="line">    <span class="built_in">console</span>.log(foo()); <span class="comment">//2</span></span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/18/JavaScript-执行上下文与变量对象/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/08/18/JavaScript-解读this关键字/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JavaScript:解读this关键字
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/08/11/SpringSecurity之认证/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SpringSecurity之认证</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -347,9 +202,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
