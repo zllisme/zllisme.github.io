@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="To be a better girl">
 <meta property="og:description" content="执行上下文每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中的运行环境大概包括两种情况。  全局环境：JavaScript代码运行起来会首先进入该环境 函数环境：当函数被调用执行时，会进入当前函数中执行代码">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/2BD94C8959D341FCB161705E8A905629?method=download&shareKey=3f8bf53fe4d9b8be0ba5d9a2d34250aa">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/29324320A56C4CDF9F8164D42BB1D447?method=download&shareKey=d49575e48be576766b049ed863bee30e">
 <meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/0CFDC9B83D35472A9A469178B8E0AF92?method=download&shareKey=7cd9852ac77e25997c30b476665e0dc0">
-<meta property="og:updated_time" content="2019-08-18T10:26:17.585Z">
+<meta property="og:updated_time" content="2019-08-19T01:04:10.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript:执行上下文与变量对象">
 <meta name="twitter:description" content="执行上下文每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中的运行环境大概包括两种情况。  全局环境：JavaScript代码运行起来会首先进入该环境 函数环境：当函数被调用执行时，会进入当前函数中执行代码">
-<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/2BD94C8959D341FCB161705E8A905629?method=download&shareKey=3f8bf53fe4d9b8be0ba5d9a2d34250aa">
+<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/29324320A56C4CDF9F8164D42BB1D447?method=download&shareKey=d49575e48be576766b049ed863bee30e">
   
     <link rel="alternative" href="/atom.xml" title="To be a better girl" type="application/atom+xml">
   
@@ -163,7 +163,7 @@
 <p>当代码在执行过程中，遇到以上两种情况，都会生成一个执行上下文，放入栈中，而处于栈顶的上下文执行完毕之后，就会自动出栈。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">'blue'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherColor = <span class="string">'red'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> tempColor = anotherColor;</span><br><span class="line">        anotherColor = color;</span><br><span class="line">        color = tempColor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    swapColors();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeColor();</span><br></pre></td></tr></table></figure>
 
-<p>根据规则，上述代码的入栈过程如下所示：<br><img src="https://note.youdao.com/yws/api/personal/file/2BD94C8959D341FCB161705E8A905629?method=download&shareKey=3f8bf53fe4d9b8be0ba5d9a2d34250aa" alt="image"></p>
+<p>根据规则，上述代码的入栈过程如下所示：<br><img src="https://note.youdao.com/yws/api/personal/file/29324320A56C4CDF9F8164D42BB1D447?method=download&shareKey=d49575e48be576766b049ed863bee30e" alt="image"></p>
 <h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><p>当调用一个函数时（激活），一个新的执行上下文就会被创建。而一个执行上下文的生命周期可以分为两个阶段。</p>
 <ul>
 <li>创建阶段-在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</li>
