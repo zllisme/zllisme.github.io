@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="To be a better girl">
 <meta property="og:description" content="什么是柯里化（curry）在计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-01T08:48:08.490Z">
+<meta property="og:updated_time" content="2019-09-07T05:54:47.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探函数的柯里化">
 <meta name="twitter:description" content="什么是柯里化（curry）在计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。">
@@ -156,17 +156,11 @@
 <p>举例来说，一个接收3个参数的普通函数，在进行柯里化后，柯里化版本的函数接收一个参数并返回接收下一个参数的函数，该函数返回一个接收第三个参数的函数。最后一个函数在接收第三个参数后，将之前接收到的三个参数应用于原普通函数中，并返回最终结果。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个接收三个参数的普通函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a,b,c</span>) </span>&#123;</span><br><span class="line">    consolo.log(a+b+c)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//用于将普通函数转化为柯里化版本的工具函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//内部实现省略，返回一个新的函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> _sum = curry(sum);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> A = _sum(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> B = A(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">B(<span class="number">3</span>); <span class="comment">//print: 6</span></span><br></pre></td></tr></table></figure>
 
-<p>而对于js，我们通常说的柯里化函数的概念，与上面计算机科学中的柯里化的概念稍微有些不同。</p>
-<p>在计算机科学中柯里化函数，一次只能传递一个参数；</p>
-<p>而我们js实际应用中的柯里化函数，可以传递一个或多个函数。</p>
-<p>例如：</p>
+<p>而对于js，我们通常说的柯里化函数的概念，与上面计算机科学中的柯里化的概念稍微有些不同。<br>在计算机科学中柯里化函数，一次只能传递一个参数；<br>而我们js实际应用中的柯里化函数，可以传递一个或多个函数。<br>例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a,b,c</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a,b,c,d,e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> _fn = curry(fn);</span><br><span class="line"></span><br><span class="line">_fn(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment">//print 1 2 3</span></span><br><span class="line">_fn(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>);<span class="comment">// print 1 2 3</span></span><br><span class="line">_fn(<span class="number">1</span>,<span class="number">2</span>)(<span class="number">3</span>); <span class="comment">// pirnt 1 2 3</span></span><br><span class="line">_fn(<span class="number">1</span>)(<span class="number">2</span>,<span class="number">3</span>) <span class="comment">//print 1 2 3</span></span><br></pre></td></tr></table></figure>
 
-<p>上面代码对于已经柯里化后的_fn函数来说，当接收的参数数量与原函数的形参数量相同时，执行原函数；</p>
-<p>当接收的参数数量小于原函数的形参数量时，返回一个函数用于接收剩余的参数，直至接收的参数数量与形参数量一致，执行原函数。</p>
-<p>当我们知道柯里化是什么了的时候，我们来看看柯里化到底有什么用？</p>
-<h2 id="柯里化的用途"><a href="#柯里化的用途" class="headerlink" title="柯里化的用途"></a>柯里化的用途</h2><p>柯里化实际是把简答的问题复杂化了，但是复杂化的同时，我们在使用函数时拥有了更加多的自由度。而这里对于函数参数的自由处理，正是柯里化的核心所在。</p>
-<p>柯里化本质上是降低通用性，提高适用性。举一个常见的例子，如果我们想要验证一串数字是否是正确的手机号，那么按照普通的思路来做，大家可能是这样封装，如下：</p>
+<p>上面代码对于已经柯里化后的_fn函数来说，当接收的参数数量与原函数的形参数量相同时，执行原函数；<br>当接收的参数数量小于原函数的形参数量时，返回一个函数用于接收剩余的参数，直至接收的参数数量与形参数量一致，执行原函数。<br>当我们知道柯里化是什么了的时候，我们来看看柯里化到底有什么用？</p>
+<h2 id="柯里化的用途"><a href="#柯里化的用途" class="headerlink" title="柯里化的用途"></a>柯里化的用途</h2><p>柯里化实际是把简答的问题复杂化了，但是复杂化的同时，我们在使用函数时拥有了更加多的自由度。而这里对于函数参数的自由处理，正是柯里化的核心所在。<br>柯里化本质上是降低通用性，提高适用性。举一个常见的例子，如果我们想要验证一串数字是否是正确的手机号，那么按照普通的思路来做，大家可能是这样封装，如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkPhone</span>(<span class="params">phoneNumber</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1[34578]\d&#123;9&#125;$/</span>.test(phoneNumber);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>而如果我们想要验证是否是邮箱呢？这么封装：</p>
@@ -184,8 +178,7 @@
 <p>最后我们在使用的时候就会变得更加直观简洁了。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">checkPhone(<span class="string">'15622166884'</span>);</span><br><span class="line">checkEmail(<span class="string">'xxxxx@163.com'</span>);</span><br></pre></td></tr></table></figure>
 
-<p>柯里化的这种用途可以被理解为：参数复用。就像上面的代码中只需传入一次正则表达式，然后就可以四处使用了。</p>
-<p>我们再来看一个例子，假设在我们项目中会调用多次map操作是将数组的每一项都转化为百分比.</p>
+<p>柯里化的这种用途可以被理解为：参数复用。就像上面的代码中只需传入一次正则表达式，然后就可以四处使用了。<br>我们再来看一个例子，假设在我们项目中会调用多次map操作是将数组的每一项都转化为百分比.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNewArray</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> array.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item * <span class="number">100</span> + <span class="string">'%'</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getNewArray([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">0.12</span>]);   <span class="comment">// ['100%', '200%', '300%', '12%'];</span></span><br></pre></td></tr></table></figure>
 
 <p>而如果借助柯里化来二次封装这样的逻辑，则会如下实现：</p>
@@ -195,9 +188,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_filter</span>(<span class="params">func, array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> array.filter(func);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> _find = curry(_filter);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> findNumber = _find(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> item == <span class="string">'number'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">findNumber([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="number">4</span>]); <span class="comment">// [1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当我们继续封装另外的过滤操作时就会变得非常简单</span></span><br><span class="line"><span class="comment">// 找出数字为20的子项</span></span><br><span class="line"><span class="keyword">let</span> find20 = _find(<span class="function"><span class="keyword">function</span>(<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="number">20</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">find20([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">30</span>, <span class="number">20</span>, <span class="number">100</span>]);  <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 找出数组中大于100的所有数据</span></span><br><span class="line"><span class="keyword">let</span> findBigger100 = _find(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (item &gt; <span class="number">100</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">findBigger100([<span class="number">1</span>, <span class="number">2</span>, <span class="number">101</span>, <span class="number">300</span>, <span class="number">2</span>, <span class="number">122</span>]); <span class="comment">// [101, 300, 122]</span></span><br></pre></td></tr></table></figure>
 
 <p>通过上面例子，相信大家对柯里化有了一个初步的了解，它的自由度能够帮助我们应对更多更复杂的场景。</p>
-<h2 id="如何封装柯里化工具函数"><a href="#如何封装柯里化工具函数" class="headerlink" title="如何封装柯里化工具函数"></a>如何封装柯里化工具函数</h2><p>接下来，我们来思考如何实现 curry 函数。</p>
-<p>我已经知道，当柯里化函数接收到足够参数后，就会执行原函数，那么我们如何去确定何时达到足够的参数呢？</p>
-<p>可以有两种思路：</p>
+<h2 id="如何封装柯里化工具函数"><a href="#如何封装柯里化工具函数" class="headerlink" title="如何封装柯里化工具函数"></a>如何封装柯里化工具函数</h2><p>接下来，我们来思考如何实现 curry 函数。<br>我已经知道，当柯里化函数接收到足够参数后，就会执行原函数，那么我们如何去确定何时达到足够的参数呢？<br>可以有两种思路：</p>
 <p>1、 通过函数的 length 属性，获取函数的形参个数，形参的个数就是所需的参数个数<br>2、 在调用柯里化工具函数时，手动指定所需的参数个数</p>
 <p>将这两点结合一下，即可实现一个简单的curry函数：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">func, len = func.length, ...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...params</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> _args = [...args, ...params];</span><br><span class="line">        <span class="comment">// 如果参数个数小于最初的func.length，则递归调用，继续收集参数</span></span><br><span class="line">        <span class="keyword">if</span> (_args.length &lt; len) &#123;</span><br><span class="line">            <span class="keyword">return</span> curry.call(<span class="keyword">this</span>, func, len, ..._args);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 参数收集完毕，则执行原函数func</span></span><br><span class="line">        <span class="keyword">return</span> func.apply(<span class="keyword">this</span>, _args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -226,57 +217,6 @@
       
 
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/01/解析函数的柯里化/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
       <div class="clearfix"></div>
     </div>
   </div>
@@ -284,6 +224,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/09/08/深入理解事件循环机制/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          深入理解事件循环机制
+        
+      </div>
+    </a>
   
   
     <a href="/2019/08/24/浅谈ES6中的promise/" id="article-nav-older" class="article-nav-link-wrap">
@@ -464,7 +413,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">做人最重要的是开心！</div>
   	  	
     	</section>
     

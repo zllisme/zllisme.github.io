@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | To be a better girl</title>
+  <title>深入理解事件循环机制 | To be a better girl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="To be a better girl">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="我们知道JavaScript的一大特点就是单线程，也就是说js在处理任务的时候，所有任务只能在一个线程上排队被执行，那如果某一个任务耗时比较长呢？总不能等到它执行结束再去执行下一个吧，所以在线程之内，又被分为了两个队列：">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解事件循环机制">
+<meta property="og:url" content="http://yoursite.com/2019/09/08/深入理解事件循环机制/index.html">
 <meta property="og:site_name" content="To be a better girl">
+<meta property="og:description" content="我们知道JavaScript的一大特点就是单线程，也就是说js在处理任务的时候，所有任务只能在一个线程上排队被执行，那如果某一个任务耗时比较长呢？总不能等到它执行结束再去执行下一个吧，所以在线程之内，又被分为了两个队列：">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/7CD42A149B3E4A3488F24C7A990BD1C3?method=download&shareKey=53f6112f56214f6fe373f80906b15cbf">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/B67BB8EE16444262BE436D41396AEA0E?method=download&shareKey=71327d61345a76e922b589e91bcfaba6">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/3FE8C0B7BC314A30BD129E5364CD44FC?method=download&shareKey=a9ab58c4c655b28e8b08d04f23a20ba9">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/9FD004B5FEF24C1C9E158BA69D6CD0FB?method=download&shareKey=07a6115cd0a7400efe6993c45123521e">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/16938438F476419BA4E95DE4FB1B1397?method=download&shareKey=89bf5cf91027c148520c5b87af501dde">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/639DD658656B4E2589EE1389EFBC70A6?method=download&shareKey=4e984d225397ef824803f587a7bc5105">
+<meta property="og:updated_time" content="2019-09-08T06:04:20.137Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="To be a better girl">
+<meta name="twitter:title" content="深入理解事件循环机制">
+<meta name="twitter:description" content="我们知道JavaScript的一大特点就是单线程，也就是说js在处理任务的时候，所有任务只能在一个线程上排队被执行，那如果某一个任务耗时比较长呢？总不能等到它执行结束再去执行下一个吧，所以在线程之内，又被分为了两个队列：">
+<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/7CD42A149B3E4A3488F24C7A990BD1C3?method=download&shareKey=53f6112f56214f6fe373f80906b15cbf">
   
     <link rel="alternative" href="/atom.xml" title="To be a better girl" type="application/atom+xml">
   
@@ -126,36 +138,137 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-深入理解事件循环机制" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      深入理解事件循环机制
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/08/深入理解事件循环机制/" class="archive-article-date">
+
+        
+        <a href="/2019/09/08/深入理解事件循环机制/" class="archive-article-date">
   	<time datetime="2019-09-08T03:11:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-08</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/08/深入理解事件循环机制/">深入理解事件循环机制</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们知道JavaScript的一大特点就是单线程，也就是说js在处理任务的时候，所有任务只能在一个线程上排队被执行，那如果某一个任务耗时比较长呢？总不能等到它执行结束再去执行下一个吧，所以在线程之内，又被分为了两个队列：</p>
+<a id="more"></a>
+<ul>
+<li><p>同步任务队列</p>
+</li>
+<li><p>异步任务队列</p>
+</li>
+</ul>
+<p>举个例子来说：比如你去银行办理业务，都需要领号排队。银行柜员一个个办理业务，这时这个柜员就相当于一个js线程，客户排的队就相当于同步任务队列，每个人对于柜员相当于一个个的任务。</p>
+<p>但这个时候，你的电话突然响了，你去接电话接了半小时。这时候人家柜员一看你这情况，直接叫了下一个，而你领的号就作废了，只能重新零号排队。这时候你就是被分发到了异步任务队列。</p>
+<p>等你前边的人都完事了，柜员把你叫过去办了你的业务，这时候就是同步队列中的任务执行完了，主线程会处理异步队列中的任务。</p>
+<h2 id="同步和异步任务"><a href="#同步和异步任务" class="headerlink" title="同步和异步任务"></a>同步和异步任务</h2><p>先看一个简单的例子,对js的执行机制有个简单的认识。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<p>上边的执行结果大家肯定都明白，先输出start，再输出end，这一段代码会进入同步队列，顺序执行。<br>那么我们加点料：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样的情况，函数调用栈执行到setTimeout时，setTimeout会在规定的时间点将回调函数放入异步队列，等待同步队列的任务被执行完，立即执行，所以结果是：start、end、setTimeout。</p>
+<h2 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h2><p>宏任务(macro-task)与微任务(micro-task)都是独立与主执行栈之外的另外两个队列，在最新标准中，它们被分别称为task与jobs,可以在概念上划分在异步任务队列里。</p>
+<ul>
+<li><p>宏任务</p>
+<ul>
+<li>script(整体代码)</li>
+<li>setTimeout, setInterval, setImmediate,</li>
+<li>I/O</li>
+<li>UI rendering</li>
+</ul>
+</li>
+<li><p>微任务 </p>
+<ul>
+<li>process.nextTick</li>
+<li>Promise</li>
+<li>Object.observe(已废弃)</li>
+<li>MutationObserver(html5新特性)</li>
+</ul>
+</li>
+</ul>
+<p>这些我们可以理解为它们在执行上下文中都是可执行代码，会立即执行，只不过会将各自的回调函数放入对应的任务队列中（宏任务微任务），也就相当于一个调度者。</p>
+<p>需要注意的是,来自不同任务源的任务会进入到不同的任务队列。其中setTimeout与setInterval是同源的。</p>
+<h2 id="事件循环机制"><a href="#事件循环机制" class="headerlink" title="事件循环机制"></a>事件循环机制</h2><p>事件循环的顺序，决定了JavaScript代码的执行顺序。</p>
+<p>我们先梳理下循环的顺序：</p>
+<ul>
+<li>循环首先从宏任务开始，遇到script，生成执行上下文，开始进入执行栈，可执行代码入栈，依次执行代码，调用完成出栈。</li>
+<li>执行过程中遇到上边提到的调度者，会同步执行调度者，由调度者将其负责的任务（回调函数）放到对应的任务队列中，直到主执行栈清空，然后开始执行微任务的任务队列。微任务也清空后，再次从宏任务开始，一直循环这一过程。其中每一个任务的执行，无论是macro-task还是micro-task，都是借助函数调用栈来完成。</li>
+</ul>
+<p>纯文字表述确实有点干涩，因此，这里我们通过2个例子，来逐步理解事件循环的具体顺序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        i == <span class="number">99</span> &amp;&amp; resolve();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'then'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'global'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>为了方便理解，我以打印出来的字符作为当前的任务名称。</p>
+<p>首先，事件循环从宏任务队列开始，这个时候，宏任务队列中，只有一个script(整体代码)任务。每一个任务的执行顺序，都依靠函数调用栈来搞定，而当遇到调度者时，则会先分发任务到对应的队列中去，所以，上面例子的第一步执行如下图所示。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/7CD42A149B3E4A3488F24C7A990BD1C3?method=download&shareKey=53f6112f56214f6fe373f80906b15cbf" alt="image"></p>
+<p>第二步：script任务执行时首先遇到了setTimeout，setTimeout为一个宏任务源，那么他的作用就是将timeout这个任务分发到它对应的队列中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://note.youdao.com/yws/api/personal/file/B67BB8EE16444262BE436D41396AEA0E?method=download&shareKey=71327d61345a76e922b589e91bcfaba6" alt="image"></p>
+<p>第三步：script执行时遇到Promise实例。Promise构造函数中的第一个参数，是在new的时候执行，因此不会进入任何其他的队列，而是直接在当前任务直接执行了，构造函数执行时，里面的参数进入函数调用栈执行，代码会依次执行，因此会顺序打印promise1、promise2。而后续的.then则会被分发到micro-task的Promise队列中去。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        i == <span class="number">99</span> &amp;&amp; resolve();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'then'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>构造函数里面的参数（这里使用promise表示）和resolve先后入栈:</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/3FE8C0B7BC314A30BD129E5364CD44FC?method=download&shareKey=a9ab58c4c655b28e8b08d04f23a20ba9" alt="image"></p>
+<p>当resolve后，.then会把其内部的回调函数（这里使用then表示)放入微任务队列:</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/9FD004B5FEF24C1C9E158BA69D6CD0FB?method=download&shareKey=07a6115cd0a7400efe6993c45123521e" alt="image"></p>
+<p>script任务继续往下执行，最后只有一句输出了global，然后，全局任务就执行完毕了。</p>
+<p>第四步：第一个宏任务script执行完毕之后，就开始执行所有的可执行的微任务。这个时候，微任务中，只有Promise队列中的一个任务then，因此直接执行就行了，执行结果输出then，当然，他的执行，也是进入函数调用栈中执行的。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/16938438F476419BA4E95DE4FB1B1397?method=download&shareKey=89bf5cf91027c148520c5b87af501dde" alt="image"></p>
+<p>第五步：当所有的micro-tast执行完毕之后，表示第一轮的循环就结束了。这个时候就得开始第二轮的循环。第二轮循环仍然从宏任务macro-task开始。这个时候，我们发现宏任务中，只有在setTimeout队列中还要一个timeout的任务等待执行。因此就直接执行即可。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/639DD658656B4E2589EE1389EFBC70A6?method=download&shareKey=4e984d225397ef824803f587a7bc5105" alt="image"></p>
+<p>这个时候宏任务队列与微任务队列中都没有任务了，所以代码就不会再输出其他东西了。</p>
+<p>那么上面这个例子的输出结果就显而易见。</p>
+<p>上边是一个简单示例，比较好理解。那么接下来看一个稍微复杂一点的（这里直接用汉字直观地表明了打印的时机，避免看起来费劲）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'第一次循环主执行栈开始'</span>)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'第二次循环开始，宏任务队列的第一个宏任务执行中'</span>)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'宏任务队列的第一个宏任务的微任务继续执行'</span>)</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'第二次循环的微任务队列的微任务执行'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'第一次循环主执行栈进行中...'</span>)</span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'第一次循环微任务，第一次循环结束'</span>)</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'第二次循环的宏任务队列的第二个宏任务执行'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'第一次循环主执行栈完成'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>同样我们分析一下执行过程：</p>
+<ul>
+<li><p>第一次循环</p>
+<ol>
+<li>进入执行栈执行代码，打印<code>第一次循环主执行栈开始</code></li>
+<li>遇到setTimeout，将回调放入宏任务队列等待执行</li>
+<li>promise声明过程是同步的，打印<code>第一次循环主执行栈进行中…</code>，resolve后遇到.then，将回调放入微任务队列</li>
+<li>打印<code>第一次循环主执行栈完成</code></li>
+<li>检查微任务队列是否有可执行代码，有一个第三步放入的任务，打印<code>第一次循环微任务，第一次循环结束</code>，到这里第一次循环结束，同时遇到setTimeout,将回调放入宏任务队列</li>
+</ol>
+</li>
+<li><p>第二次循环</p>
+<ol>
+<li>从宏任务入手，检查宏任务队列，发现还有有两个宏任务，分别是第一次循环第二步和第一次循环第五步被放入的任务，先执行第一个宏任务，打印<code>第二次循环开始，宏任务队列的第一个宏任务执行中</code></li>
+<li>遇到promise声明语句，打印<code>宏任务队列的第一个宏任务继续执行</code>,这时候又被resolve了，又会将.then中的回调放入微任务队列</li>
+<li>第一个宏任务中的同步代码执行完毕，检查微任务队列，发现有一段第二步放进去的代码，执行打印<code>第二次循环的微任务队列的微任务执行</code>，此时第一个宏任务执行完毕</li>
+<li>开始执行第二个宏任务，打印<code>第二次循环的宏任务队列的第二个宏任务执行</code>，所有任务队列全部清空，执行完毕</li>
+</ol>
+</li>
+</ul>
+<p>所以打印顺序为：</p>
+<ul>
+<li>第一次循环主执行栈开始</li>
+<li>第一次循环主执行栈进行中…</li>
+<li>第一次循环主执行栈完成</li>
+<li>第一次循环微任务，第一次循环结束</li>
+<li>第二次循环开始，宏任务队列的第一个宏任务执行中</li>
+<li>第二次循环的宏任务队列的第一个宏任务的微任务继续执行</li>
+<li>第二次循环的微任务队列的微任务执行</li>
+<li>第二次循环的宏任务队列的第二个宏任务执行</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -167,209 +280,55 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/01/解析函数的柯里化/" class="archive-article-date">
-  	<time datetime="2019-09-01T04:50:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/01/解析函数的柯里化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初探函数的柯里化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/01/解析函数的柯里化/">初探函数的柯里化</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/24/浅谈ES6中的promise/" class="archive-article-date">
-  	<time datetime="2019-08-24T03:59:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/24/浅谈ES6中的promise/">浅谈ES6中的promise对象</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/JavaScript-解读this关键字/" class="archive-article-date">
-  	<time datetime="2019-08-18T07:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/JavaScript-解读this关键字/">JavaScript:解读this关键字</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/JavaScript-执行上下文与变量对象/" class="archive-article-date">
-  	<time datetime="2019-08-18T03:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/JavaScript-执行上下文与变量对象/">JavaScript:执行上下文、变量对象以及作用域链</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/SpringSecurity之认证/" class="archive-article-date">
-  	<time datetime="2019-08-11T10:54:39.164Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/SpringSecurity之认证/">SpringSecurity之认证</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -392,8 +351,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
