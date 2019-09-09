@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/9FD004B5FEF24C1C9E158BA69D6CD0FB?method=download&shareKey=07a6115cd0a7400efe6993c45123521e">
 <meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/16938438F476419BA4E95DE4FB1B1397?method=download&shareKey=89bf5cf91027c148520c5b87af501dde">
 <meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/639DD658656B4E2589EE1389EFBC70A6?method=download&shareKey=4e984d225397ef824803f587a7bc5105">
-<meta property="og:updated_time" content="2019-09-08T06:04:20.137Z">
+<meta property="og:updated_time" content="2019-09-09T11:17:34.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解事件循环机制">
 <meta name="twitter:description" content="我们知道JavaScript的一大特点就是单线程，也就是说js在处理任务的时候，所有任务只能在一个线程上排队被执行，那如果某一个任务耗时比较长呢？总不能等到它执行结束再去执行下一个吧，所以在线程之内，又被分为了两个队列：">
@@ -203,7 +203,7 @@
 <li>循环首先从宏任务开始，遇到script，生成执行上下文，开始进入执行栈，可执行代码入栈，依次执行代码，调用完成出栈。</li>
 <li>执行过程中遇到上边提到的调度者，会同步执行调度者，由调度者将其负责的任务（回调函数）放到对应的任务队列中，直到主执行栈清空，然后开始执行微任务的任务队列。微任务也清空后，再次从宏任务开始，一直循环这一过程。其中每一个任务的执行，无论是macro-task还是micro-task，都是借助函数调用栈来完成。</li>
 </ul>
-<p>纯文字表述确实有点干涩，因此，这里我们通过2个例子，来逐步理解事件循环的具体顺序。</p>
+<p>看到这里，你可能还是很懵，纯文字表述确实有点干涩，别急，这里我们通过2个例子，来逐步理解事件循环的具体顺序，相信你再回过头看就会恍然大悟了。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        i == <span class="number">99</span> &amp;&amp; resolve();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'then'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'global'</span>);</span><br></pre></td></tr></table></figure>
 
 <p>为了方便理解，我以打印出来的字符作为当前的任务名称。</p>
