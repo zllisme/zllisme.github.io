@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/8 | To be a better girl</title>
+  <title>事务管理、隔离级别以及事务传播行为 | To be a better girl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="To be a better girl">
-<meta property="og:url" content="http://yoursite.com/archives/2019/08/index.html">
+  <meta name="description" content="事务的4大特性（ACID）原子性（Atomicity） 原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚，这和前面两篇博客介绍事务的功能是一样的概念，因此事务的操作如果成功就必须要完全应用到数据库，如果操作失败则不能对数据库有任何影响。">
+<meta name="keywords" content="database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事务管理、隔离级别以及事务传播行为">
+<meta property="og:url" content="http://yoursite.com/2019/09/15/事务管理、隔离级别以及事务传播行为/index.html">
 <meta property="og:site_name" content="To be a better girl">
+<meta property="og:description" content="事务的4大特性（ACID）原子性（Atomicity） 原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚，这和前面两篇博客介绍事务的功能是一样的概念，因此事务的操作如果成功就必须要完全应用到数据库，如果操作失败则不能对数据库有任何影响。">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-15T13:43:31.626Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="To be a better girl">
+<meta name="twitter:title" content="事务管理、隔离级别以及事务传播行为">
+<meta name="twitter:description" content="事务的4大特性（ACID）原子性（Atomicity） 原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚，这和前面两篇博客介绍事务的功能是一样的概念，因此事务的操作如果成功就必须要完全应用到数据库，如果操作失败则不能对数据库有任何影响。">
   
     <link rel="alternative" href="/atom.xml" title="To be a better girl" type="application/atom+xml">
   
@@ -126,174 +131,300 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-事务管理、隔离级别以及事务传播行为" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      事务管理、隔离级别以及事务传播行为
+    </h1>
+  
+
+        
+        <a href="/2019/09/15/事务管理、隔离级别以及事务传播行为/" class="archive-article-date">
+  	<time datetime="2019-09-15T13:38:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-15</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="事务的4大特性（ACID）"><a href="#事务的4大特性（ACID）" class="headerlink" title="事务的4大特性（ACID）"></a>事务的4大特性（ACID）</h2><p><strong>原子性（Atomicity）</strong></p>
+<p>原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚，这和前面两篇博客介绍事务的功能是一样的概念，因此事务的操作如果成功就必须要完全应用到数据库，如果操作失败则不能对数据库有任何影响。</p>
+<a id="more"></a>
+<p><strong>一致性（Consistency）</strong></p>
+<p>一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说一个事务执行之前和执行之后都必须处于一致性状态。</p>
+<p>拿转账来说，假设用户A和用户B两者的钱加起来一共是5000，那么不管A和B之间如何转账，转几次账，事务结束后两个用户的钱相加起来应该还得是5000，这就是事务的一致性。</p>
+<p><strong>隔离性（Isolation）</strong></p>
+<p>隔离性是当多个用户并发访问数据库时，比如操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。</p>
+<p>即要达到这么一种效果：对于任意两个并发的事务T1和T2，在事务T1看来，T2要么在T1开始之前就已经结束，要么在T1结束之后才开始，这样每个事务都感觉不到有其他事务在并发地执行。</p>
+<p>关于事务的隔离性数据库提供了多种隔离级别，稍后会介绍到。</p>
+<p><strong>持久性（Durability）</strong></p>
+<p>持久性是指一个事务一旦被提交了，那么对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。
+　　</p>
+<h2 id="事务并发访问的问题（隔离性）"><a href="#事务并发访问的问题（隔离性）" class="headerlink" title="事务并发访问的问题（隔离性）"></a>事务并发访问的问题（隔离性）</h2><p><strong>脏读</strong></p>
+<p>两个事务正在并发的执行，事实上最后结果应该是1500才对，时间5时刻的查询余额为0就是脏数据，事务A读取了事务B中未提交的数据，这就是脏读。</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th align="center">事务A</th>
+<th align="center">事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="center">开始事务</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">-</td>
+<td align="center">开始事务</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">-</td>
+<td align="center">查询余额有1000</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">-</td>
+<td align="center">取出1000，余额0</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center">查询余额0</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center">-</td>
+<td align="center">撤销事务</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center">存入500</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>8</td>
+<td align="center">余额500</td>
+<td align="center">提交事务</td>
+</tr>
+</tbody></table>
+<p><strong>不可重复读</strong></p>
+<p>两个事务正在并发的执行，结果A两次读取的结果不一样，这是因为两次查询有间隔，期间被其他事务修改并提交了事务，相比脏读的区别是，不可重复读是读取另一事务提交的数据。这种现象也是正常的，是由于事务的隔离级造成的，但是在在某些特别的情况下也是不允许的。</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th align="center">事务A</th>
+<th align="center">事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="center">开始事务</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">-</td>
+<td align="center">开始事务</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">-</td>
+<td align="center">查询余额有1000</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">查询余额1000</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center">-</td>
+<td align="center">取出1000，余额0</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center">-</td>
+<td align="center">提交事务</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center">查询余额0</td>
+<td align="center">-</td>
+</tr>
+</tbody></table>
+<p><strong>幻读</strong></p>
+<p>两个事务正在并发的执行，事务A第一次统计和第二统计的结果不一样，是因为事务B新增了一条数据，和不可重复读一样，都是读取了另外一个事务的数据，不同的是不可重复读查询的是同一条数据，而幻读则是针对批量的数据，或者说不可重复读是A读取了B的更新数据，幻读是A读取了B的新增数据。</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th align="center">事务A</th>
+<th align="center">事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="center">开始事务</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">-</td>
+<td align="center">开始事务</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">统计总金额1000</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center">-</td>
+<td align="center">存入500</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center">-</td>
+<td align="center">提交事务</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center">统计总金额1500</td>
+<td align="center">-</td>
+</tr>
+</tbody></table>
+<h2 id="数据库的隔离级别"><a href="#数据库的隔离级别" class="headerlink" title="数据库的隔离级别"></a>数据库的隔离级别</h2><p>明白上面的问题之后你就明白为什么需要隔离级别了，不同的隔离级别能处理不同的并发事务问题，下表是Mysql数据库的隔离级别,MySQL默认的事务级别是REPEATABLE_READ.</p>
+<table>
+<thead>
+<tr>
+<th>事务级别</th>
+<th align="center">脏读</th>
+<th align="center">不可重复读</th>
+<th align="center">幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>READ_UNCOMMITTED</td>
+<td align="center">允许</td>
+<td align="center">允许</td>
+<td align="center">允许</td>
+</tr>
+<tr>
+<td>READ_COMMITTED</td>
+<td align="center">禁止</td>
+<td align="center">允许</td>
+<td align="center">允许</td>
+</tr>
+<tr>
+<td>REPEATABLE_READ</td>
+<td align="center">禁止</td>
+<td align="center">允许</td>
+<td align="center">允许</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td align="center">禁止</td>
+<td align="center">禁止</td>
+<td align="center">禁止</td>
+</tr>
+</tbody></table>
+<p>oracle数据库支持READ_COMMITTED 和 SERIALIZABLE这两种事务隔离级别。<br>默认系统事务隔离级别是READ_COMMITTED,也就是读已提交</p>
+<h2 id="Spring的事务传播行为"><a href="#Spring的事务传播行为" class="headerlink" title="Spring的事务传播行为"></a>Spring的事务传播行为</h2><h3 id="什么是事务传播行为？"><a href="#什么是事务传播行为？" class="headerlink" title="什么是事务传播行为？"></a>什么是事务传播行为？</h3><p>事务传播行为用来描述由某一个事务传播行为修饰的方法被嵌套进另一个方法的时事务如何传播。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void methodA()&#123;</span><br><span class="line">    methodB();</span><br><span class="line">    //doSomething</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> @Transaction(Propagation=XXX)</span><br><span class="line"> public void methodB()&#123;</span><br><span class="line">    //doSomething</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码中<code>methodA()</code>方法嵌套调用了<code>methodB()</code>方法，<code>methodB()</code>的事务传播行为由<code>@Transaction(Propagation=XXX)</code>设置决定。这里需要注意的是<code>methodA()</code>并没有开启事务，某一个事务传播行为修饰的方法并不是必须要在开启事务的外围方法中调用。</p>
+<h3 id="Spring中七种事务传播行为"><a href="#Spring中七种事务传播行为" class="headerlink" title="Spring中七种事务传播行为"></a>Spring中七种事务传播行为</h3><p><strong>REQUIRED</strong><br>业务方法需要在一个事务中运行。如果方法运行时，已经处在一个事务中，那么这个时候就会加入到该事务中，如果当前没有事务环境的话，就会为自己创建一个新的事务。</p>
+<p><strong>SUPPORTS</strong><br>这一事务属性表明，如果业务方法A在某个事务范围内被调用，则方法成为事务的一部分。如果业务方法在事务范围外被调用，则方法在没有事务的环境下执行。即当标注了事务传播属性——SUPPORTS的业务方法在另一个bean的业务方法中执行时，如果另一个bean的业务方法开启了事务，它就会处在事务中执行，如果另一个bean的业务方法也没开启事务，那么它也在没有事务的环境中进行。</p>
+<p><strong>MANDATORY</strong><br>该属性指定业务方法只能在一个已经存在的事务中执行，业务方法不能发起自己的事务。如果业务方法在没有事务的环境下调用，容器就会抛出异常。一种比较强硬的方式。</p>
+<p><strong>REQUIRES_NEW</strong><br>该属性表明不管当前是否存在事务，业务方法总会为自己发起一个新的事务。如果方法已经运行在一个事务中，则原有事务会被挂起，新的事务会被创建，直到方法执行结束，新事务才算结束，原先的事务才会恢复执行。</p>
+<p><strong>NOT_SUPPORTED</strong><br>声明方法不需要事务。如果方法没有关联到一个事务，容器不会为它开启事务。如果方法在一个事务中被调用(在其他业务bean的方法中被调用了，而其他业务bean的方法是开启了事务的)，该事务会被挂起，在方法调用结束后，原先的事务便会恢复执行。</p>
+<p><strong>NEVER</strong><br>指定业务方法绝对不能在事务范围内执行。如果业务方法在某个事务中执行，容器会抛出异常，只有业务方法没有关联到任何事务，才能正常执行。比较强硬的方式，就是不支持事务。</p>
+<p><strong>NESTED</strong><br>（嵌套事务）如果一个活动的事务存在，则当前方法运行在一个嵌套的事务中。 如果没有活动事务，就创建一个新的事务。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。外部事务回滚会导致内部事务的回滚。如果被调用的内部方法没有捕获异常，跑出异常也会导致外部事务的回滚。</p>
+<p>既然我们知道了事务传播的类型，那么如何使用它们呢？很简单，在使用注解方式的事务时候我们可以用下面的方式来设置事务的传播行为.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Transactional(propagation = Propagation.REQUIRED)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/24/浅谈ES6中的promise/" class="archive-article-date">
-  	<time datetime="2019-08-24T03:59:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/24/浅谈ES6中的promise/">浅谈ES6中的promise对象</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">database</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/JavaScript-解读this关键字/" class="archive-article-date">
-  	<time datetime="2019-08-18T07:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/08/深入理解事件循环机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深入理解事件循环机制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/JavaScript-解读this关键字/">JavaScript:解读this关键字</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/JavaScript-执行上下文与变量对象/" class="archive-article-date">
-  	<time datetime="2019-08-18T03:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/JavaScript-执行上下文与变量对象/">JavaScript:执行上下文、变量对象以及作用域链</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/SpringSecurity之认证/" class="archive-article-date">
-  	<time datetime="2019-08-11T10:54:39.164Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/SpringSecurity之认证/">SpringSecurity之认证</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -316,8 +447,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
